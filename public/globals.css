@@ -33,6 +33,14 @@ body::-webkit-scrollbar-button {
 	display: none;
 }
 
+@font-face {
+	font-family: "scope";
+	src: url("/fonts/ScopeTrial-Light.otf");
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+}
+
 .test {
 	border: 1px solid red;
 }

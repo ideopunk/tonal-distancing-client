@@ -24,6 +24,11 @@ class MyDocument extends Document {
 					<meta property="og:image:alt" content="Image description" />
 					<meta property="og:image:width" content="2604" />
 					<meta property="og:image:height" content="2380" />
+
+					<link
+						href="https://fonts.googleapis.com/css2?family=Murecho&display=swap"
+						rel="stylesheet"
+					></link>
 				</Head>
 				<body>
 					<Main />
