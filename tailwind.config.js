@@ -4,6 +4,7 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			sans: ["Murecho"],
+			serif: ["Noto Serif"],
 		},
 		extend: {
 			colors: {

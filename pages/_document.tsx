@@ -25,12 +25,13 @@ class MyDocument extends Document {
 					<meta property="og:image:width" content="2604" />
 					<meta property="og:image:height" content="2380" />
 
+					<link rel="preconnect" href="https://fonts.gstatic.com" />
 					<link
-						href="https://fonts.googleapis.com/css2?family=Murecho&display=swap"
+						href="https://fonts.googleapis.com/css2?family=Murecho:wght@400;900&family=Noto+Serif&display=swap"
 						rel="stylesheet"
-					></link>
+					/>
 				</Head>
-				<body>
+				<body className="w-screen h-screen bg-dune-white dark:bg-drac-black overflow-y-scroll">
 					<Main />
 					<NextScript />
 				</body>
