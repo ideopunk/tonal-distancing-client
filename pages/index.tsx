@@ -84,7 +84,7 @@ export default function Home() {
 								setSelectedFile(e.target.files[0]);
 							}
 						}}
-						className="file:border-0 file:bg-dune-green dark:file:bg-drac-green dark:file:text-drac-black file:text-dune-white file:rounded-full hover:file:underline file:p-3 file:font-bold file:opacity-90 hover:file:opacity-100 transition-opacity file:w-full file:cursor-pointer"
+						className="file:border-0 file:bg-at-pink dark:file:bg-drac-green dark:file:text-drac-black  file:rounded-full hover:file:underline file:p-3 file:font-bold file:opacity-90 hover:file:opacity-100 transition-opacity file:w-full file:cursor-pointer"
 					/>
 
 					<p className="mt-6">{selectedFile?.name}</p>
@@ -96,7 +96,7 @@ export default function Home() {
 						id="submit"
 						name="submit"
 						className="block 
-								bg-dune-blue dark:bg-drac-purple dark:text-drac-black 
+								bg-at-blue dark:bg-drac-purple dark:text-drac-black 
 								border-0 opacity-90 hover:opacity-100 transition-opacity 
 								font-sans font-bold p-3 px-4 rounded-full w-full 
 								hover:underline cursor-pointer"
@@ -108,9 +108,9 @@ export default function Home() {
 					{Boolean(report)
 						? report.map((run) => (
 								<span
-									className={`my-2 whitespace-pre-line font-serif text-justify
+									className={`my-2 text-black whitespace-pre-line font-serif text-justify
 										dark:selection:bg-drac-white
-										${run.problem ? "text-dune-red dark:text-drac-red problem" : "text-dune-grey dark:text-drac-white"}
+										${run.problem ? "text-at-red dark:text-drac-red problem" : "text-at-ice dark:text-drac-white"}
 										`}
 									key={run.text.slice(0, 10)}
 									onLoad={run.problem ? (e) => handleLoadProblem(e) : undefined}

@@ -31,7 +31,7 @@ class MyDocument extends Document {
 						rel="stylesheet"
 					/>
 				</Head>
-				<body className="w-screen h-screen bg-dune-white dark:bg-drac-black overflow-y-scroll">
+				<body className="w-screen h-screen bg-white dark:bg-drac-black overflow-y-scroll">
 					<Main />
 					<NextScript />
 				</body>
