@@ -1,9 +1,10 @@
 import { useTheme } from "next-themes";
 import Head from "next/head";
-import { SyntheticEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
 import ArrowDownSvg from "../components/ArrowDownSvg";
 import ArrowUpSvg from "../components/ArrowUpSvg";
 import MoonSvg from "../components/MoonSvg";
+import Problem from "../components/Problem";
 import SunSvg from "../components/SunSvg";
 import { inquisitor } from "../library/fake";
 import fetcher from "../library/fetcher";
@@ -14,25 +15,31 @@ export default function Home() {
 	const [selectedFile, setSelectedFile] = useState<File>();
 	const { theme, setTheme } = useTheme();
 
-	const [report, setReport] = useState<Run[]>([
-		{ text: inquisitor, problem: false },
-		{ text: "yabadaba", problem: false },
-		{ text: "doo\n", problem: true },
-		{ text: "nabayaba", problem: false },
-		{ text: "doo", problem: true },
-	]);
+	const [report, setReport] = useState<Run[]>([]);
 
 	const [positions, setPositions] = useState<number[]>([]);
 
-	async function handleSubmit() {
-		setPositions([]);
-		setReport([]);
-		const res = await fetcher<Run[]>("/fake", "PUT", selectedFile);
-		if ("message" in res) {
-			alert(res.message);
-			setReport([{ text: res.message, problem: true }]);
+	async function handleSubmit(e: FormEvent) {
+		e.preventDefault();
+		if (selectedFile) {
+			setPositions([]);
+			setReport([]);
+			const formFile = new FormData();
+			formFile.append("file", selectedFile);
+			const res = await fetcher<Run[]>(
+				"http://localhost:8000/report?lookahead=50&stop_words=and",
+				"POST",
+				formFile
+			);
+
+			console.log(res);
+			if ("message" in res) {
+				setReport([{ text: res.message, problem: true }]);
+			} else {
+				setReport(res);
+			}
 		} else {
-			setReport(res);
+			setReport([{ text: "Please pick a file.", problem: true }]);
 		}
 	}
 
@@ -50,11 +57,8 @@ export default function Home() {
 		window.scrollTo({ top: nextY });
 	}
 
-	function handleLoadProblem(e: SyntheticEvent<HTMLSpanElement>) {
-		console.log("load problem");
-		const rect = e.currentTarget.getBoundingClientRect();
-		const position = rect.top || rect.y;
-		setPositions((pre) => [...pre, position]);
+	function handleLoadProblem(n: number) {
+		setPositions((pre) => [...pre, n]);
 	}
 
 	useEffect(() => {
@@ -106,18 +110,25 @@ export default function Home() {
 			<main className="z-10 flex flex-col items-center w-full">
 				<div className="max-w-[75ch] text-2xl text-justify">
 					{Boolean(report)
-						? report.map((run) => (
-								<span
-									className={`my-2 text-black whitespace-pre-line font-serif text-justify
+						? report.map((run, i) =>
+								run.problem ? (
+									<Problem
+										key={run.text + i}
+										text={run.text}
+										onLoad={handleLoadProblem}
+									/>
+								) : (
+									<p
+										className={`my-2 text-black whitespace-pre-line font-serif text-justify
 										dark:selection:bg-drac-white
 										${run.problem ? "text-at-red dark:text-drac-red problem" : "text-at-ice dark:text-drac-white"}
 										`}
-									key={run.text.slice(0, 10)}
-									onLoad={run.problem ? (e) => handleLoadProblem(e) : undefined}
-								>
-									{run.text}
-								</span>
-						  ))
+										key={run.text + i}
+									>
+										{run.text}
+									</p>
+								)
+						  )
 						: "aoh wfawohf\nawohf\naowhe foaeh foa;wf haweiohf awoiefh\nawoe;f eoifh eofih eiofh eoifh ;oifh wo;ifh\na;oiefh ao;wefih\nawo;efh aw;oiefh aweoi;hf"}
 				</div>
 			</main>
