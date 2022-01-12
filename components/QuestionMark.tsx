@@ -1,31 +1,23 @@
 export default function QuestionMark() {
 	return (
-		<svg
-			width="32"
-			height="32"
-			strokeWidth="1.5"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+			<title>Help Circle</title>
 			<path
-				d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+				d="M256 80a176 176 0 10176 176A176 176 0 00256 80z"
+				fill="none"
 				stroke="currentColor"
-				strokeLinecap="round"
-				strokeLinejoin="round"
+				strokeMiterlimit="10"
+				strokeWidth="32"
 			/>
 			<path
-				d="M9 9C9 5.49997 14.5 5.5 14.5 9C14.5 11.5 12 10.9999 12 13.9999"
+				d="M200 202.29s.84-17.5 19.57-32.57C230.68 160.77 244 158.18 256 158c10.93-.14 20.69 1.67 26.53 4.45 10 4.76 29.47 16.38 29.47 41.09 0 26-17 37.81-36.37 50.8S251 281.43 251 296"
+				fill="none"
 				stroke="currentColor"
 				strokeLinecap="round"
-				strokeLinejoin="round"
+				strokeMiterlimit="10"
+				strokeWidth="28"
 			/>
-			<path
-				d="M12 18.01L12.01 17.9989"
-				stroke="currentColor"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			/>
+			<circle cx="250" cy="348" r="20" fill="currentColor" />
 		</svg>
 	);
 }

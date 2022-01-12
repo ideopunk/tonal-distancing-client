@@ -19,18 +19,18 @@ export default function Menu() {
 	const { theme, setTheme } = useTheme();
 
 	return (
-		<div className="flex items-center fixed bottom-8 right-8 z-10">
+		<div className="flex flex-col lg:flex-row items-center fixed bottom-8 right-0 lg:right-8 z-10">
 			{loaded && (
 				<>
 					{router.pathname.includes("about") ? (
 						<Link href="/">
-							<a className="mr-4 hover:scale-125 transition-transform w-8 h-8 -rotate-90">
+							<a className="mb-4 lg:mb-0 lg:mr-4 hover:scale-125 transition-transform w-5 h-5 lg:w-8 lg:h-8 -rotate-90">
 								<ArrowUpSvg />
 							</a>
 						</Link>
 					) : (
 						<Link href="/about">
-							<a className="mr-4 hover:scale-125 transition-transform">
+							<a className="w-5 h-5 lg:w-8 lg:h-8 mb-4 lg:mb-0 lg:mr-4 hover:scale-125 transition-transform">
 								<QuestionMark />
 							</a>
 						</Link>
@@ -38,7 +38,7 @@ export default function Menu() {
 					<button
 						title="Toggle theme"
 						onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-						className="w-8 h-8 hover:scale-125 transition-transform"
+						className="w-5 h-5 lg:w-8 lg:h-8 hover:scale-125 transition-transform"
 					>
 						{theme === "light" ? <SunSvg /> : <MoonSvg />}
 					</button>

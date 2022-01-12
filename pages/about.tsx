@@ -3,14 +3,14 @@ import Anchor from "../components/Anchor";
 
 function Section({ question, answer }: { question: ReactNode; answer: ReactNode }) {
 	return (
-		<div className="mb-12">
+		<div className="mb-12 max-w-[85%] md:max-w-screen-md lg:max-w-screen-lg">
 			<h3
-				className={`my-2 text-3xl text-black dark:text-white whitespace-pre-line font-serif text-justify`}
+				className={`my-2 text-lg md:text-xl lg:text-3xl text-black dark:text-white whitespace-pre-line font-serif text-justify`}
 			>
 				{question}
 			</h3>
 			<p
-				className={`my-2 text-2xl text-black dark:text-white whitespace-pre-line font-serif text-justify`}
+				className={`my-2 text-base md:text-lg lg:text-2xl text-black dark:text-white whitespace-pre-line font-serif text-justify`}
 			>
 				{answer}
 			</p>
@@ -21,7 +21,7 @@ function Section({ question, answer }: { question: ReactNode; answer: ReactNode 
 export default function About() {
 	return (
 		<main className="z-10 flex flex-col items-center w-full">
-			<div className="max-w-[75ch] text-2xl text-justify pt-10">
+			<div className="max-w-[75ch] lg:text-2xl flex flex-col items-center pt-10">
 				<Section
 					question="What does this do?"
 					answer="It highlights words you use repetitively in the file you've submitted! You can choose how many words ahead the program 'looks' for a duplicate. The program uses an internal stop-word list so you don't get yelled at for reusing 'the'."
@@ -67,7 +67,7 @@ export default function About() {
 					question="Where do I contact you?"
 					answer={
 						<span>
-							At{" "}
+							Give me a <em>shout</em> at{" "}
 							<Anchor href="mailto:conorbarnes93@gmail.com" target={"_blank"}>
 								conorbarnes93@gmail.com
 							</Anchor>{" "}

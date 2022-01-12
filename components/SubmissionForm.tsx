@@ -72,18 +72,14 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 						setSelectedFile(e.target.files[0]);
 					}
 				}}
-				className="file:border-0 file:bg-at-pink dark:file:bg-drac-green dark:file:text-drac-black  file:rounded-full hover:file:underline file:p-3 file:font-bold file:opacity-90 hover:file:opacity-100 transition-opacity file:w-full file:cursor-pointer"
+				className="file:border-0 file:bg-at-pink dark:file:bg-drac-green dark:file:text-drac-black  file:rounded-full hover:file:underline file:p-3 file:font-bold file:opacity-90 hover:file:opacity-100 transition-opacity file:w-full file:cursor-pointer mb-4"
 			/>
-
-			<p aria-label="Selected file name" className="my-6 font-sans font-bold">
-				{selectedFile?.name}
-			</p>
 
 			<label
 				className={`flex justify-between 
 					dark:text-drac-black 
 						border-0 opacity-90 hover:opacity-100 transition-all
-						font-sans font-bold py-3  rounded-full w-full px-6 hover:underline focus:no-underline
+						font-sans font-bold py-3  rounded-full w-full px-6 mb-4 hover:underline focus:no-underline
 						 dark:bg-drac-yellow cursor-pointer bg-at-ice	
 						`}
 			>
@@ -100,7 +96,7 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 					className="bg-transparent font-bold w-2/5 text-right outline-none focus:underline h-6 selection:bg-at-ice dark:selection:bg-drac-purple"
 				/>
 			</label>
-			<label htmlFor="submit" className="invisible">
+			<label htmlFor="submit" className="hidden">
 				{loading ? "Just a sec..." : "Submit"}
 			</label>
 			<input
@@ -121,6 +117,10 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 								}
 								`}
 			/>
+
+			<p aria-label="Selected file name" className="my-6 font-sans font-bold">
+				{selectedFile?.name}
+			</p>
 		</form>
 	);
 }
