@@ -1,19 +1,24 @@
-import { useTheme } from "next-themes";
 import Head from "next/head";
 import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
 import ArrowDownSvg from "../components/ArrowDownSvg";
 import ArrowUpSvg from "../components/ArrowUpSvg";
-import MoonSvg from "../components/MoonSvg";
+import Menu from "../components/Menu";
 import Problem from "../components/Problem";
-import SunSvg from "../components/SunSvg";
 import { inquisitor } from "../library/fake";
 import fetcher from "../library/fetcher";
 
-type Run = { text: string; problem: boolean };
+type Run = { text: string; repeated: boolean };
+
+// WOAH THERE
+const domain =
+	process.env.NODE_ENV !== "development"
+		? "http://localhost:8000"
+		: "https://tonal-distancing-production.up.railway.app";
 
 export default function Home() {
+
+
 	const [selectedFile, setSelectedFile] = useState<File>();
-	const { theme, setTheme } = useTheme();
 
 	const [report, setReport] = useState<Run[]>([]);
 
@@ -26,20 +31,16 @@ export default function Home() {
 			setReport([]);
 			const formFile = new FormData();
 			formFile.append("file", selectedFile);
-			const res = await fetcher<Run[]>(
-				"http://localhost:8000/report?lookahead=50&stop_words=and",
-				"POST",
-				formFile
-			);
+			const res = await fetcher<Run[]>(domain + "/report?lookahead=50", "POST", selectedFile);
 
 			console.log(res);
 			if ("message" in res) {
-				setReport([{ text: res.message, problem: true }]);
+				setReport([{ text: res.message, repeated: true }]);
 			} else {
 				setReport(res);
 			}
 		} else {
-			setReport([{ text: "Please pick a file.", problem: true }]);
+			setReport([{ text: "Please pick a file.", repeated: true }]);
 		}
 	}
 
@@ -111,33 +112,25 @@ export default function Home() {
 				<div className="max-w-[75ch] text-2xl text-justify">
 					{Boolean(report)
 						? report.map((run, i) =>
-								run.problem ? (
+								run.repeated ? (
 									<Problem
 										key={run.text + i}
 										text={run.text}
 										onLoad={handleLoadProblem}
 									/>
 								) : (
-									<p
-										className={`my-2 text-black whitespace-pre-line font-serif text-justify
-										dark:selection:bg-drac-white
-										${run.problem ? "text-at-red dark:text-drac-red problem" : "text-at-ice dark:text-drac-white"}
-										`}
+									<span
+										className={`my-2 text-black whitespace-pre-line font-serif text-justify inline
+										dark:selection:bg-drac-white`}
 										key={run.text + i}
 									>
 										{run.text}
-									</p>
+									</span>
 								)
 						  )
 						: "aoh wfawohf\nawohf\naowhe foaeh foa;wf haweiohf awoiefh\nawoe;f eoifh eofih eiofh eoifh ;oifh wo;ifh\na;oiefh ao;wefih\nawo;efh aw;oiefh aweoi;hf"}
 				</div>
 			</main>
-			<button
-				onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-				className="w-8 h-8 fixed bottom-8 right-8 z-10 hover:scale-125 transition-transform"
-			>
-				{theme === "light" ? <SunSvg /> : <MoonSvg />}
-			</button>
 
 			{Boolean(report) && (
 				<div className="flex flex-col items-center fixed bottom-8 left-8">

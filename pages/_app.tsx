@@ -2,8 +2,10 @@ import "../public/globals.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
+import Menu from "../components/Menu";
 
 function MyApp({ Component, pageProps }: AppProps) {
+	
 	return (
 		<>
 			<Head>
@@ -12,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<ThemeProvider attribute="class">
 				<Component {...pageProps} />
+				<Menu />
 			</ThemeProvider>
 		</>
 	);

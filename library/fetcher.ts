@@ -1,7 +1,7 @@
 export default async function fetcher<T>(
 	domain: string,
 	method?: "POST" | "GET" | "PUT",
-	file?: FormData
+	body?: BodyInit
 ): Promise<T | { message: string }> {
 	try {
 		const response = await fetch(domain, {
@@ -12,7 +12,7 @@ export default async function fetcher<T>(
 				"Accept-encoding": "gzip, deflate",
 				"Content-Type": "text/plain",
 			},
-			body: file
+			body,
 		});
 
 		const rj = await response.json();

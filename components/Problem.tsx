@@ -15,7 +15,7 @@ export default function Problem({ text, onLoad }: { text: string; onLoad: (n: nu
 	return (
 		<p
 			ref={ref}
-			className="my-2 whitespace-pre-line font-serif text-justify 
+			className="my-2 whitespace-pre-line font-serif text-justify inline
                      dark:selection:bg-drac-white text-at-red dark:text-drac-red"
 		>
 			{text}
