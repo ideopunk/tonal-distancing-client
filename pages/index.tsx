@@ -18,7 +18,7 @@ export default function Home() {
 	const handleLoadProblem = useCallback((n: number) => {
 		setPositions((pre) => {
 			const latest = pre[pre.length - 1];
-			if (n - latest < 150) return pre;
+			if (n - latest < window.innerHeight - 50) return pre;
 			return [...pre, n];
 		});
 	}, []);
@@ -33,7 +33,7 @@ export default function Home() {
 			<aside className="flex flex-col items-center p-4 mb-2">
 				<SubmissionForm handleReport={handleReport} />
 			</aside>
-			<main className="z-10 flex flex-col items-center w-full">
+			<main className="z-10 flex flex-col items-center w-full scroll-smooth">
 				<div className="w-[75ch] max-w-[85%] text-lg lg:text-2xl text-justify">
 					{Boolean(report) &&
 						report.map((run, i) =>

@@ -93,7 +93,7 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 					step={1}
 					onClick={() => ref.current?.select()}
 					onChange={(e) => handleLookAhead(e.currentTarget.value)}
-					className="bg-transparent font-bold w-2/5 text-right outline-none focus:underline h-6 selection:bg-at-ice dark:selection:bg-drac-purple"
+					className="bg-transparent font-bold w-2/5 text-right cursor-pointer outline-none focus:underline h-6 selection:bg-at-ice dark:selection:bg-drac-purple"
 				/>
 			</label>
 			<label htmlFor="submit" className="hidden">

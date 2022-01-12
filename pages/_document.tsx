@@ -33,7 +33,7 @@ class MyDocument extends Document {
 
 					<link rel="icon" href="/sun.svg"/>
 				</Head>
-				<body className="w-screen h-screen bg-white dark:bg-drac-black overflow-y-scroll">
+				<body className="w-screen h-screen bg-white dark:bg-drac-black overflow-y-scroll scroll-smooth">
 					<Main />
 					<NextScript />
 				</body>
