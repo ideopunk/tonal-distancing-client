@@ -1,49 +1,21 @@
 import Head from "next/head";
-import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import ArrowDownSvg from "../components/ArrowDownSvg";
 import ArrowUpSvg from "../components/ArrowUpSvg";
-import Loading from "../components/Loading";
-import Menu from "../components/Menu";
 import Problem from "../components/Problem";
-import { inquisitor } from "../library/fake";
+import SubmissionForm from "../components/SubmissionForm";
 import fetcher from "../library/fetcher";
 
 type Run = { text: string; repeated: boolean };
 
-// WOAH THERE
-const domain =
-	process.env.NODE_ENV !== "development"
-		? "http://localhost:8000"
-		: "https://tonal-distancing-production.up.railway.app";
-
 export default function Home() {
-	const [loading, setLoading] = useState(false);
-	const [selectedFile, setSelectedFile] = useState<File>();
-
 	const [report, setReport] = useState<Run[]>([]);
 
 	const [positions, setPositions] = useState<number[]>([]);
 
-	async function handleSubmit(e: FormEvent) {
-		e.preventDefault();
-		if (selectedFile) {
-			setLoading(true);
-			setPositions([]);
-			setReport([]);
-			const formFile = new FormData();
-			formFile.append("file", selectedFile);
-			const res = await fetcher<Run[]>(domain + "/report?lookahead=50", "POST", selectedFile);
-
-			console.log(res);
-			if ("message" in res) {
-				setReport([{ text: res.message, repeated: true }]);
-			} else {
-				setReport(res);
-			}
-			setLoading(false);
-		} else {
-			setReport([{ text: "Please pick a file.", repeated: true }]);
-		}
+	function handleReport(runs: Run[]) {
+		setPositions([]);
+		setReport(runs);
 	}
 
 	function scrollTo(dir: "up" | "down") {
@@ -64,10 +36,6 @@ export default function Home() {
 		setPositions((pre) => [...pre, n]);
 	}
 
-	useEffect(() => {
-		console.log(positions);
-	}, [positions]);
-
 	return (
 		<div className="w-full h-full">
 			<Head>
@@ -77,46 +45,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<aside className="flex flex-col items-center m-4">
-				<form onSubmit={handleSubmit} className="flex flex-col items-center">
-					<label className="invisible" htmlFor="fileinput">
-						Upload File
-					</label>
-					<input
-						id="fileinput"
-						name="fileinput"
-						type="file"
-						// value={selectedFile}
-						onChange={(e) => {
-							if (e.target.files) {
-								setSelectedFile(e.target.files[0]);
-							}
-						}}
-						className="file:border-0 file:bg-at-pink dark:file:bg-drac-green dark:file:text-drac-black  file:rounded-full hover:file:underline file:p-3 file:font-bold file:opacity-90 hover:file:opacity-100 transition-opacity file:w-full file:cursor-pointer"
-					/>
-
-					<p className="mt-6">{selectedFile?.name}</p>
-					<label htmlFor="submit" className="invisible">
-						{loading ? "Just a sec..." : "Submit"}
-					</label>
-					<input
-						type="submit"
-						id="submit"
-						value={loading ? "Just a sec..." : "Submit"}
-						name="submit"
-						disabled={loading}
-						className={`block 
-							dark:text-drac-black 
-								border-0 opacity-90 hover:opacity-100 transition-all
-								font-sans font-bold p-3 px-4 rounded-full w-full 
-								hover:underline cursor-pointer 
-								${
-									loading
-										? "bg-at-yellow dark:bg-drac-orange animate-pulse hover:no-underline"
-										: "bg-at-blue dark:bg-drac-purple"
-								}
-								`}
-					/>
-				</form>
+				<SubmissionForm handleReport={handleReport} />
 			</aside>
 			<main className="z-10 flex flex-col items-center w-full">
 				<div className="max-w-[75ch] text-2xl text-justify">
@@ -141,22 +70,20 @@ export default function Home() {
 				</div>
 			</main>
 
-			{Boolean(report.length) && (
-				<div className="flex flex-col items-center fixed bottom-8 left-8">
-					<button
-						className="block w-8 h-8 hover:scale-125 transition-transform"
-						onClick={() => scrollTo("up")}
-					>
-						<ArrowUpSvg />
-					</button>
-					<button
-						className="block w-8 h-8 hover:scale-125 transition-transform"
-						onClick={() => scrollTo("down")}
-					>
-						<ArrowDownSvg />
-					</button>
-				</div>
-			)}
+			<div className="flex flex-col items-center fixed bottom-8 left-8">
+				<button
+					className="block w-8 h-8 hover:scale-125 transition-transform"
+					onClick={() => scrollTo("up")}
+				>
+					<ArrowUpSvg />
+				</button>
+				<button
+					className="block w-8 h-8 hover:scale-125 transition-transform"
+					onClick={() => scrollTo("down")}
+				>
+					<ArrowDownSvg />
+				</button>
+			</div>
 		</div>
 	);
 }
