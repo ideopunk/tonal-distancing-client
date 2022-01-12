@@ -1,7 +1,6 @@
 export default function ArrowDownSvg() {
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512">
-			<title>Arrow Down Circle</title>
 			<path
 				fill="none"
 				stroke="currentColor"

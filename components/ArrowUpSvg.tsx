@@ -1,7 +1,6 @@
 export default function ArrowUpSvg() {
 	return (
 		<svg viewBox="0 0 512 512" className="group-hover:opacity-50 group-hover:scale-125 ">
-			<title>Arrow Up Circle</title>
 			<path
 				fill="none"
 				stroke="currentColor"

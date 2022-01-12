@@ -75,7 +75,7 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 				className="file:border-0 file:bg-at-pink dark:file:bg-drac-green dark:file:text-drac-black  file:rounded-full hover:file:underline file:p-3 file:font-bold file:opacity-90 hover:file:opacity-100 transition-opacity file:w-full file:cursor-pointer"
 			/>
 
-			<p aria-label="Selected file name" className="mt-6">
+			<p aria-label="Selected file name" className="my-6 font-sans font-bold">
 				{selectedFile?.name}
 			</p>
 

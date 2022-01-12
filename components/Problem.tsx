@@ -8,9 +8,9 @@ export default function Problem({ text, onLoad }: { text: string; onLoad: (n: nu
 		if (offset) {
 			onLoad(offset);
 		} else {
-			console.log("that didn't work @ Problem.tsx");
+			console.log("that really should have worked");
 		}
-	}, []);
+	}, [onLoad]);
 
 	return (
 		<p

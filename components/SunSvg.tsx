@@ -1,7 +1,6 @@
 export default function SunSvg() {
 	return (
 		<svg viewBox="0 0 512 512">
-			<title>Sunny</title>
 			<path
 				fill="none"
 				stroke="currentColor"

@@ -36,6 +36,7 @@ export default function Menu() {
 						</Link>
 					)}
 					<button
+						title="Toggle theme"
 						onClick={() => setTheme(theme === "light" ? "dark" : "light")}
 						className="w-8 h-8 hover:scale-125 transition-transform"
 					>
