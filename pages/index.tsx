@@ -2,6 +2,7 @@ import Head from "next/head";
 import { FormEvent, SyntheticEvent, useEffect, useRef, useState } from "react";
 import ArrowDownSvg from "../components/ArrowDownSvg";
 import ArrowUpSvg from "../components/ArrowUpSvg";
+import Loading from "../components/Loading";
 import Menu from "../components/Menu";
 import Problem from "../components/Problem";
 import { inquisitor } from "../library/fake";
@@ -16,8 +17,7 @@ const domain =
 		: "https://tonal-distancing-production.up.railway.app";
 
 export default function Home() {
-
-
+	const [loading, setLoading] = useState(false);
 	const [selectedFile, setSelectedFile] = useState<File>();
 
 	const [report, setReport] = useState<Run[]>([]);
@@ -27,6 +27,7 @@ export default function Home() {
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
 		if (selectedFile) {
+			setLoading(true);
 			setPositions([]);
 			setReport([]);
 			const formFile = new FormData();
@@ -39,6 +40,7 @@ export default function Home() {
 			} else {
 				setReport(res);
 			}
+			setLoading(false);
 		} else {
 			setReport([{ text: "Please pick a file.", repeated: true }]);
 		}
@@ -94,45 +96,52 @@ export default function Home() {
 
 					<p className="mt-6">{selectedFile?.name}</p>
 					<label htmlFor="submit" className="invisible">
-						Submit
+						{loading ? "Just a sec..." : "Submit"}
 					</label>
 					<input
 						type="submit"
 						id="submit"
+						value={loading ? "Just a sec..." : "Submit"}
 						name="submit"
-						className="block 
-								bg-at-blue dark:bg-drac-purple dark:text-drac-black 
-								border-0 opacity-90 hover:opacity-100 transition-opacity 
+						disabled={loading}
+						className={`block 
+							dark:text-drac-black 
+								border-0 opacity-90 hover:opacity-100 transition-all
 								font-sans font-bold p-3 px-4 rounded-full w-full 
-								hover:underline cursor-pointer"
+								hover:underline cursor-pointer 
+								${
+									loading
+										? "bg-at-yellow dark:bg-drac-orange animate-pulse hover:no-underline"
+										: "bg-at-blue dark:bg-drac-purple"
+								}
+								`}
 					/>
 				</form>
 			</aside>
 			<main className="z-10 flex flex-col items-center w-full">
 				<div className="max-w-[75ch] text-2xl text-justify">
-					{Boolean(report)
-						? report.map((run, i) =>
-								run.repeated ? (
-									<Problem
-										key={run.text + i}
-										text={run.text}
-										onLoad={handleLoadProblem}
-									/>
-								) : (
-									<span
-										className={`my-2 text-black whitespace-pre-line font-serif text-justify inline
+					{Boolean(report) &&
+						report.map((run, i) =>
+							run.repeated ? (
+								<Problem
+									key={run.text + i}
+									text={run.text}
+									onLoad={handleLoadProblem}
+								/>
+							) : (
+								<span
+									className={`my-2 text-black dark:text-drac-white whitespace-pre-line font-serif text-justify inline
 										dark:selection:bg-drac-white`}
-										key={run.text + i}
-									>
-										{run.text}
-									</span>
-								)
-						  )
-						: "aoh wfawohf\nawohf\naowhe foaeh foa;wf haweiohf awoiefh\nawoe;f eoifh eofih eiofh eoifh ;oifh wo;ifh\na;oiefh ao;wefih\nawo;efh aw;oiefh aweoi;hf"}
+									key={run.text + i}
+								>
+									{run.text}
+								</span>
+							)
+						)}
 				</div>
 			</main>
 
-			{Boolean(report) && (
+			{Boolean(report.length) && (
 				<div className="flex flex-col items-center fixed bottom-8 left-8">
 					<button
 						className="block w-8 h-8 hover:scale-125 transition-transform"
