@@ -3,7 +3,8 @@ import catcher from "./catcher";
 export default async function fetcher<T>(
 	domain: string,
 	method?: "POST" | "GET" | "PUT",
-	body?: BodyInit
+	body?: BodyInit,
+	docx?: boolean
 ): Promise<T | { message: string }> {
 	try {
 		const response = await fetch(domain, {
@@ -12,7 +13,7 @@ export default async function fetcher<T>(
 			headers: {
 				Accept: "application/json",
 				"Accept-encoding": "gzip, deflate",
-				"Content-Type": "text/plain",
+				"Content-Type": docx ? "application/msword" : "text/plain",
 			},
 			body,
 		});
@@ -26,7 +27,7 @@ export default async function fetcher<T>(
 		const rj = await response.json();
 
 		if (typeof rj === "string") return { message: rj };
-		
+
 		return rj;
 	} catch (e) {
 		const err = catcher(e);

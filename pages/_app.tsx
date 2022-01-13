@@ -9,7 +9,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Head>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta charSet="UTF-8" />
-				<link rel="icon" href="/images/sun.svg" />
 			</Head>
 			<ThemeProvider attribute="class">
 				<Component {...pageProps} />

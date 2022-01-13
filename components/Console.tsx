@@ -36,7 +36,7 @@ export default function Menu({ positions }: { positions: number[] }) {
 	}
 
 	return (
-		<div className="fixed bottom-0 py-2 px-10  left-0 w-full flex justify-between backdrop-blur-sm lg:backdrop-blur-0 ">
+		<div className="fixed bottom-0 py-2 px-6 lg:px-10  left-0 w-full flex justify-between backdrop-blur-sm lg:backdrop-blur-0 ">
 			{/* SELECTORS */}
 			<div className="flex lg:flex-col items-center lg:h-20 justify-between ">
 				{!!positions.length && (

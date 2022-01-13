@@ -6,7 +6,7 @@ type Run = { text: string; repeated: boolean };
 // domain
 const domain =
 	process.env.NODE_ENV === "development"
-		? "http://localhost:8000"
+		? "http://192.168.2.43:8000"
 		: "https://tonal-distancing-production.up.railway.app";
 
 export default function SubmissionForm({ handleReport }: { handleReport: (runs: Run[]) => void }) {
@@ -43,7 +43,8 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 			const res = await fetcher<Run[]>(
 				`${domain}/report?lookahead=${lookaheadLength}`,
 				"POST",
-				selectedFile
+				selectedFile,
+				selectedFile.type !== "text/plain"
 			);
 
 			if (typeof res === "object" && "message" in res) {
