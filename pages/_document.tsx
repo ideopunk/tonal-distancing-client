@@ -31,7 +31,7 @@ class MyDocument extends Document {
 						rel="stylesheet"
 					/>
 
-					<link rel="icon" href="/images/sun.svg" />
+					<link rel="icon" href="/sun.svg" />
 				</Head>
 				<body className="w-screen h-screen bg-white dark:bg-drac-black overflow-y-scroll scroll-smooth">
 					<Main />

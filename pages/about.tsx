@@ -21,7 +21,7 @@ function Section({ question, answer }: { question: ReactNode; answer: ReactNode 
 
 export default function About() {
 	return (
-		<main className="z-10 flex flex-col items-center w-full">
+		<main className="z-10 flex flex-col items-center w-full pb-20">
 			<h1 className="text-4xl lg:text-5xl font-serif pt-10">Tonal Distancing</h1>
 			<div className="max-w-[75ch] lg:text-2xl flex flex-col items-center pt-10">
 				<Section
@@ -74,7 +74,7 @@ export default function About() {
 								conorbarnes93@gmail.com
 							</Anchor>{" "}
 							or on{" "}
-							<Anchor href="twitter.com/ideopunk" target="_blank">
+							<Anchor href="https://twitter.com/ideopunk" target="_blank">
 								Twitter
 							</Anchor>
 							.
