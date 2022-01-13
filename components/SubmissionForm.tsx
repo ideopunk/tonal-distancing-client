@@ -5,7 +5,7 @@ type Run = { text: string; repeated: boolean };
 
 // domain
 const domain =
-	process.env.NODE_ENV !== "development"
+	process.env.NODE_ENV === "development"
 		? "http://localhost:8000"
 		: "https://tonal-distancing-production.up.railway.app";
 
@@ -46,8 +46,7 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 				selectedFile
 			);
 
-			console.log(res);
-			if ("message" in res) {
+			if (typeof res === "object" && "message" in res) {
 				handleReport([{ text: res.message, repeated: true }]);
 			} else {
 				handleReport(res);
@@ -67,6 +66,7 @@ export default function SubmissionForm({ handleReport }: { handleReport: (runs: 
 				id="fileinput"
 				name="fileinput"
 				type="file"
+				accept=".txt, .md, .docx"
 				onChange={(e) => {
 					if (e.target.files) {
 						setSelectedFile(e.target.files[0]);

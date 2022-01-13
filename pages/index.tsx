@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
-import PointerSystem from "../components/PointerSystem";
+import Menu from "../components/Console";
 import Problem from "../components/Problem";
 import SubmissionForm from "../components/SubmissionForm";
 
@@ -18,7 +18,7 @@ export default function Home() {
 	const handleLoadProblem = useCallback((n: number) => {
 		setPositions((pre) => {
 			const latest = pre[pre.length - 1];
-			if (n - latest < window.innerHeight - 50) return pre;
+			if (n - latest < window.innerHeight) return pre;
 			return [...pre, n];
 		});
 	}, []);
@@ -56,7 +56,7 @@ export default function Home() {
 				</div>
 			</main>
 
-			<PointerSystem positions={positions} />
+			<Menu positions={positions} />
 		</div>
 	);
 }

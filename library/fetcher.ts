@@ -1,3 +1,5 @@
+import catcher from "./catcher";
+
 export default async function fetcher<T>(
 	domain: string,
 	method?: "POST" | "GET" | "PUT",
@@ -15,11 +17,19 @@ export default async function fetcher<T>(
 			body,
 		});
 
+		const type = response.headers.get("content-type");
+		if (typeof type === "string" && type.includes("text")) {
+			const rt = await response.text();
+			return { message: rt };
+		}
+
 		const rj = await response.json();
-		console.log(rj);
+
+		if (typeof rj === "string") return { message: rj };
+		
 		return rj;
-	} catch (e: any) {
-		console.log(e);
-		return { message: e.message };
+	} catch (e) {
+		const err = catcher(e);
+		return { message: err };
 	}
 }

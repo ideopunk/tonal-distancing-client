@@ -1,16 +1,17 @@
 import { ReactNode } from "react";
 import Anchor from "../components/Anchor";
+import Menu from "../components/Console";
 
 function Section({ question, answer }: { question: ReactNode; answer: ReactNode }) {
 	return (
 		<div className="mb-12 max-w-[85%] md:max-w-screen-md lg:max-w-screen-lg">
 			<h3
-				className={`my-2 text-lg md:text-xl lg:text-3xl text-black dark:text-white whitespace-pre-line font-serif text-justify`}
+				className={`my-2 text-lg md:text-xl lg:text-3xl text-black dark:text-white whitespace-pre-line font-serif`}
 			>
 				{question}
 			</h3>
 			<p
-				className={`my-2 text-base md:text-lg lg:text-2xl text-black dark:text-white whitespace-pre-line font-serif text-justify`}
+				className={`my-2 text-base md:text-lg lg:text-2xl text-black dark:text-white whitespace-pre-line font-serif`}
 			>
 				{answer}
 			</p>
@@ -80,6 +81,7 @@ export default function About() {
 					}
 				/>
 			</div>
+			<Menu positions={[]} />
 		</main>
 	);
 }
