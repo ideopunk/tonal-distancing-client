@@ -23,7 +23,7 @@ export default function About() {
 	return (
 		<main className="z-10 flex flex-col items-center w-full pb-20">
 			<h1 className="text-4xl lg:text-5xl font-serif pt-10">Tonal Distancing</h1>
-			<div className="max-w-[75ch] lg:text-2xl flex flex-col items-center pt-10">
+			<div className="max-w-[75ch] lg:text-2xl flex flex-col pt-10">
 				<Section
 					question="What does this do?"
 					answer="It highlights words you use repetitively in the file you've submitted! You can choose how many words ahead the program 'looks' for a duplicate. The program uses an internal stop-word list so you don't get yelled at for reusing 'the'."
@@ -78,6 +78,18 @@ export default function About() {
 								Twitter
 							</Anchor>
 							.
+						</span>
+					}
+				/>
+
+				<Section
+					question="Where did you get your dark theme?    "
+					answer={
+						<span>
+							<Anchor href="https://draculatheme.com/" target={"_blank"}>
+								Dracula
+							</Anchor>
+							{"!"}
 						</span>
 					}
 				/>
